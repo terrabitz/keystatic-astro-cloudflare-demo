@@ -1,43 +1,25 @@
-# Astro Starter Kit: Minimal
+# keystatic-astro-cloudflare-demo
 
-```sh
-npm create astro@latest -- --template minimal
+I recently went through the process of setting up Keystatic on my Astro site deployed to Cloudflare Workers. I figured I'd document the process in a short tutorial to help anyone else looking to setup a similar stack
+
+## Steps
+
+- Follow the official guide to integrate Keystatic into your Astro project: [Adding Keystatic to an Astro project - Docs \| Keystatic](https://keystatic.com/docs/installation-astro)
+- Follow the GitHub Mode instructions: [GitHub mode - Docs \| Keystatic](https://keystatic.com/docs/github-mode)
+- Add the Cloudflare Adapter: [@astrojs/cloudflare \| Docs](https://docs.astro.build/en/guides/integrations-guide/cloudflare/)
+- Add your secrets to the Cloudflare Workers environments (this will prompt you to login to Cloudflare if you haven't already)
+
+```
+npx wrangler secret bulk .env
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Build and deploy
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm run build
+npx wrangler deploy
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- Update your GitHub App's callback URL to `https://<app-name>.<account-name>.workers.dev/api/keystatic/github/oauth/callback`
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Done! Now you should be able to access Keystatic at `https://<app-name>.<account-name>.workers.dev/keystatic`
