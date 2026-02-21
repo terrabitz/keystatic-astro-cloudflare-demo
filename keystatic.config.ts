@@ -3,7 +3,11 @@ import { config, fields, collection } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'local',
+    kind: 'github',
+    repo: {
+      owner: 'terrabitz',
+      name: 'keystatic-astro-cloudflare-demo'
+    }   
   },
   collections: {
     posts: collection({
